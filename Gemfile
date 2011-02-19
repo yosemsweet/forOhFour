@@ -43,6 +43,7 @@ group :development do
 	gem "rails3-generators"
 	gem 'cucumber-rails'
 	gem 'cucumber'
+	gem 'rspec-rails', ">= 2.0.1"
 end
 
 
@@ -60,4 +61,7 @@ group :test do
 	gem 'spork'
 	gem 'rb-fsevent'
 	gem 'guard-spork'
+	gem "autotest"
+	gem "autotest-growl"
+	gem "autotest-fsevent"
 end
