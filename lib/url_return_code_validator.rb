@@ -2,7 +2,9 @@ require 'net/http'
 
 class UrlReturnCodeValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-		# puts "Validating #{value} returns #{options[:status]}"
+		if options[:status] == 200 
+			puts "Validating #{value} returns #{options[:status]}"
+		end
 		
 		begin
 			uri = URI.parse(value)
@@ -15,17 +17,20 @@ class UrlReturnCodeValidator < ActiveModel::EachValidator
 
 			# puts response
 		rescue
+			puts $!
 			status = -1
 		end
 		record.errors[attribute] << "URL must return #{options[:status]} - returned #{status}" unless status == options[:status]
 		
-			# puts '----------'
-			# puts record.errors
-			# puts status
-			# puts value
-			# puts attribute
-			# puts options[:status]
-			# puts '----------'
+		if options[:status] == 200
+			 puts '----------'
+			 puts record.errors
+			 puts status
+			 puts value
+			 puts attribute
+			 puts options[:status]
+			 puts '----------'
+		end
 
 		record.errors
   end
