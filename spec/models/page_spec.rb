@@ -10,4 +10,9 @@ describe Page do
 		p = Page.new
 		p.should respond_to(:description)
 	end
+	
+	it "should validate url returns a 404 status" do
+		p = Page.new
+		p.should validate_with_404_return_code(:url)
+	end
 end
