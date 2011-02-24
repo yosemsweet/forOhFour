@@ -3,13 +3,14 @@ Feature: Manage pages
   Product Manager
   wants to manage 404 pages.
   
+
+
   Scenario: Register new page
     Given I am on the new page page
-    When I fill in "Url" with "url 1"
+    When I fill in "Url" with "http://www.google.com/404"
     And I fill in "Description" with "description 1"
-    And I press "Create"
-    Then I should see "url 1"
-    And I should see "description 1"
+    And I press "Save"
+    Then I should see a new page for "http://www.google.com/404" with "description 1"
 
   # Rails generates Delete links that use Javascript to pop up a confirmation
   # dialog and then do a HTTP POST request (emulated DELETE request).
@@ -34,16 +35,3 @@ Feature: Manage pages
   # of the tags above is to modify your views to use <button> instead. You can
   # see how in http://github.com/jnicklas/capybara/issues#issue/12
   #
-  Scenario: Delete page
-    Given the following pages:
-      |url|description|
-      |url 1|description 1|
-      |url 2|description 2|
-      |url 3|description 3|
-      |url 4|description 4|
-    When I delete the 3rd page
-    Then I should see the following pages:
-      |Url|Description|
-      |url 1|description 1|
-      |url 2|description 2|
-      |url 4|description 4|
